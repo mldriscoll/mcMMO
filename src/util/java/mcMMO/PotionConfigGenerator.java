@@ -431,7 +431,9 @@ public class PotionConfigGenerator {
                     children.put(new Ingredient(Material.FERMENTED_SPIDER_EYE), new WriteablePotion(current.mat, PotionType.SLOWNESS));
                     children.put(new Ingredient(Material.GLOWSTONE_DUST), new WriteablePotion(current.mat, new PotionData(current.data.getType(), false, true)));
                     children.put(new Ingredient(Material.REDSTONE), new WriteablePotion(current.mat, new PotionData(current.data.getType(), true, false)));
-                }
+                } else if (!current.data.isUpgraded() && current.data.isExtended()) {
+					children.put(new Ingredient(Material.GLOWSTONE_DUST), new WriteablePotion(current.mat, new PotionData(current.data.getType(), true, true)));
+				}
                 return;
             case NIGHT_VISION :
                 assert(!current.data.isUpgraded());
