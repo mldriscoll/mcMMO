@@ -20,6 +20,7 @@ import org.bukkit.inventory.BrewerInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +125,16 @@ public final class AlchemyPotionBrewer {
 
             AlchemyPotion input = PotionConfig.getInstance().getPotion(item);
             AlchemyPotion output = input.getChild(ingredient);
+
+            float durationFactor = (250 + UserManager.getPlayer(player).getAlchemyManager().getSkillLevel()) / 250;
+            if(durationFactor > 4){
+                durationFactor = 4;
+            }
+
+			for (int i2 = 0; i2 < output.effects.size(); i2++) {
+				PotionEffect effect = output.effects.get(i2);
+				output.effects.set(i2, new PotionEffect(effect.getType(), (int) (effect.getDuration() * durationFactor), effect.getAmplifier()));
+			}
 
             inputList.add(input);
 

@@ -18,7 +18,7 @@ public class AlchemyPotion {
     private PotionData data;
     private String name;
     private List<String> lore;
-    private List<PotionEffect> effects;
+    public List<PotionEffect> effects;
     private Color color;
     private Map<ItemStack, String> children;
 
